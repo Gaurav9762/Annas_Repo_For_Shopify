@@ -1,0 +1,24 @@
+        {% if pagination.pages > 0 %}
+
+            <nav role="navigation" class="flex justify-center my-8">
+        {% if pagination.previous %}
+            <a href="{{ pagination.previous.url }}" class="px-4 py-2 mx-2 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300 ease-in-out">{{ pagination.previous.title }}</a>
+        {% endif %}
+
+        {% for part in pagination.parts %}
+
+            {% if part.is_link %}
+                <a href="{{part.url }}" class="px-4 py-2 mx-2 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300 ease-in-out">{{ part.title }}</a>
+            {% endif %}
+            {% else %}
+                <span class="px-4 py-2 mx-2 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300 ease-in-out">{{ part.title }}</span>
+            
+        {% endfor %}
+
+        {% if pagination.next %}
+            <a href="{{ pagination.next.url }}" class="px-4 py-2 mx-2 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300 ease-in-out">{{ pagination.next.title }}</a>
+        {% endif %}
+    </nav>
+
+            
+        {% endif %}
