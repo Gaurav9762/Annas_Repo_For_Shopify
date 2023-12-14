@@ -1,0 +1,95 @@
+<div class="flex flex-col items-center ">
+
+  {% if section.settings.title != blank %}
+    <h1 class="font-medium text-2xl py-6">
+      {{ section.settings.title }}
+    </h1>
+  {% endif %}
+
+  {% form 'contact' %}
+
+    {% if form.errors %}
+      <div class="border p-5">
+        <div class="flex flex-row items-center w-full my-3">
+          <div class="text-red-500">
+            {% render 'icon-failed' %}
+          </div>
+          <div class="text-sm font-medium ml-3">
+            Oh no! Your message was not sent!!
+          </div>
+        </div>
+        <ul class="px-4 mb-3 ml-7 list-decimal">
+          {% for error in form.errors %}
+            <li>
+              <span>{{ form.errors.messages[error] }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% elsif form.posted_successfully? %}
+      <div class="flex flex-row items-center w-full my-3 p-5">
+        <div class="text-green-500">
+          {% render 'icon-success' %}
+        </div>
+        <div class="text-sm font-medium ml-3">Message is sent successfully</div>
+      </div>
+    {% endif %}
+
+    <div class="mb-4 ">
+      <label for="contact_name" class="block text-gray-700 font-bold mb-2 text-center">Name</label>
+      <input
+        type="text"
+        name="contact[name]"
+        id="contact_name"
+        class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-black-1000 w-full max-w-lg text-center"
+        placeholder="Enter your name">
+    </div>
+
+    <div class="mb-5">
+      <label for="contact_email" class="block text-gray-700 font-bold mb-2 text-center">Email</label>
+      <input
+        type="email"
+        name="contact[email]"
+        id="contact_email"
+        class="w-full border  border-solid rounded-md px-4 py-2 focus:outline-none focus:border-blue-400 text-center"
+        placeholder="Enter your email">
+    </div>
+
+    <div class="mb-4">
+      <label for="contact_message" class="block text-gray-700 font-bold mb-2 text-center">Message</label>
+      <textarea
+        name="contact[body]"
+        id="contact_message"
+        class="w-full border  border-gray-300 rounded-md px-4 py-5 focus:outline-none focus:border-blue-400 text-center"
+        rows="4"
+        placeholder="Enter your message"></textarea>
+    </div>
+
+    <div>
+      <input
+        type="submit"
+        value="Submit"
+        class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+    </div>
+  {% endform %}
+
+</div>
+
+
+{% schema %}
+  {
+    "name": "Contact Form",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Contact Form"
+      }
+    ]
+  }
+{% endschema %}
