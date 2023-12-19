@@ -1,8 +1,7 @@
 {
-  "name": "template 404",
   "sections": {
     "template": {
-      "type": "template-404"
+      "type": "template-search"
     }
   },
   "order": ["template"]
